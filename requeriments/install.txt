@@ -1,0 +1,12 @@
+blog
+1. npx create-react-app .
+5. npm install axios
+7. npm install react-bootstrap bootstrap
+8. npm install react-router-dom
+
+
+server
+2. npm init
+3. npm install mysql
+4. npm install express
+6. npm install cors

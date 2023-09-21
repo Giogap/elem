@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+.Title {
+    font-size: 20px;
+}
+
+.App-header nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 1rem;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.App-header nav a {
+    text-decoration: none;
+    color: #e2e2e2;
+}
+
+.App-header nav a:hover { 
+    color: grey;
+  }
+
+.App-header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 60px;
+}
+
+.bandas-container {
+    margin: 30px;
+}
+
+.bandas-container li {
+    margin: 50px;
+}
