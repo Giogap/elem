@@ -72,7 +72,7 @@ function Formulario() {
   }
 
   const getBands = () => {
-    Axios.get("http://localhost:3001/bandas").then((response) => {
+    Axios.get("http://localhost:3001/bands").then((response) => {
       setBands(response.data);
     });
   };
@@ -95,7 +95,7 @@ function Formulario() {
           <label>Biografia: <input onChange={(event)=>{
             setBiography(event.target.value);
           }} type="text" value={biography}></input></label>          
-          <label>Pais: <input onChange={(event)=>{
+          <label>Telefono: <input onChange={(event)=>{
             setPhone(event.target.value);
           }} type="text" value={phone}></input></label>
           {
