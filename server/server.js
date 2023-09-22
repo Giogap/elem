@@ -18,11 +18,11 @@ app.post("/create", (req, res) => {
     const name = req.body.name;
     const country = req.body.country;
     const genre = req.body.genre;
-    const biografia = req.body.biografia;    
+    const biography = req.body.biography;    
     const pais = req.body.pais;
     
 
-    db.query('INSERT INTO bandas(name, country, genre, biografia, pais) VALUES (?, ?, ?, ?, ?)', [name, country, genre, biografia, pais], (err, result) => {
+    db.query('INSERT INTO bandas(name, country, genre, biography, pais) VALUES (?, ?, ?, ?, ?)', [name, country, genre, biography, pais], (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -91,12 +91,12 @@ app.put("/update", (req, res) => {
     const name = req.body.name;
     const country = req.body.country;
     const genre = req.body.genre;
-    const biografia = req.body.biografia;    
+    const biography = req.body.biography;    
     const pais = req.body.pais;
     const id = req.body.id;
     
 
-    db.query('UPDATE bands SET name = ?, country = ?, genre = ?, biografia = ?, pais = ? WHERE id = ?', [name, country, biografia, genero, pais, id], (err, result) => {
+    db.query('UPDATE bands SET name = ?, country = ?, genre = ?, biography = ?, pais = ? WHERE id = ?', [name, country, genre, biography, pais, id], (err, result) => {
         if (err) {
             console.log(err);
         } else {

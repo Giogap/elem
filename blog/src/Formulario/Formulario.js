@@ -9,8 +9,8 @@ function Formulario() {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [genre, setGenre] = useState("");
-  const [biografia, setBiografia] = useState("");  
-  const [pais, setPais] = useState("");
+  const [biography, setBiography] = useState("");  
+  const [phone, setPhone] = useState("");
   const [id, setId] = useState("");
 
   const [edit, setEdit] = useState(false);
@@ -22,8 +22,8 @@ function Formulario() {
       name: name,
       country: country,
       genre: genre,
-      biografia: biografia,      
-      pais: pais,
+      biography: biography,      
+      phone: phone,
     }).then(() => {
       /*getBandas();*/
       alert("Registro Ok");
@@ -36,8 +36,8 @@ function Formulario() {
       name: name,
       country: country,
       genre: genre,
-      biografia: biografia,      
-      pais: pais,
+      biography: biography,      
+      phone: phone,
       id:id,
     }).then(() => {
       alert("Actualizado Ok")
@@ -55,7 +55,8 @@ function Formulario() {
     setName("");
     setCountry("");
     setGenre("");
-    setPais("");
+    setBiography("");
+    setPhone("");
     setEdit(false);
   }
 
@@ -65,8 +66,8 @@ function Formulario() {
     setName(val.name);
     setCountry(val.country);
     setGenre(val.genre);
-    setBiografia(val.biografia);    
-    setPais(val.pais);
+    setBiography(val.biography);    
+    setPhone(val.phone);
     setId(val.id);
   }
 
@@ -92,12 +93,11 @@ function Formulario() {
             setGenre(event.target.value);
           }} type="text" value={genre}></input></label>
           <label>Biografia: <input onChange={(event)=>{
-            setBiografia(event.target.value);
-          }} type="text" value={biografia}></input></label>
-          
+            setBiography(event.target.value);
+          }} type="text" value={biography}></input></label>          
           <label>Pais: <input onChange={(event)=>{
-            setPais(event.target.value);
-          }} type="text" value={pais}></input></label>
+            setPhone(event.target.value);
+          }} type="text" value={phone}></input></label>
           {
             edit?
             <div>
@@ -113,9 +113,10 @@ function Formulario() {
             <thead>
               <tr>
                 <th>Nombre</th>
-                <th>Biografía</th>
-                <th>Género</th>
                 <th>País</th>
+                <th>Género</th>
+                <th>Biografía</th>
+                <th>Telefono</th>              
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -123,9 +124,10 @@ function Formulario() {
               {bandsList.map((band) => (
                 <tr key={band.id}>
                   <td><Link to={`/Formulariolink/${band.id}`}>{band.name}</Link></td>
-                  <td>{band.genre}</td>
-                  <td>{band.biografia}</td>                  
-                  <td>{band.pais}</td>
+                    <td>{band.country}</td>
+                    <td>{band.genre}</td>                  
+                    <td>{band.biography}</td> 
+                    <td>{band.phone}</td>                
                   <td>
                     <button onClick={() => {
                       editBand(band);   

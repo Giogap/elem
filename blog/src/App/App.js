@@ -4,11 +4,11 @@ import "./App.css";
 import logo from './logo.svg';
 
 import Home from "../Navbar/Home";
-import Bandas from "../Bands/Bands";
-import Pais from "../Country/Country";
+import Bands from "../Bands/Bands";
+import Country from "../Country/Country";
 import Navbar from "../Navbar/Navbar";
 import Formulario from "../Formulario/Formulario";
-import Biografia from "../Biografia/Biografia";
+import Biography from "../Biography/Biography";
 import Multimedia from "../Multimedia/Multimedia";
 import Productos from "../Productos/Productos";
 import FormularioLink from "../Formulario/Formulariolink";
@@ -24,10 +24,10 @@ function App() {
       <div className='App-body'>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/bandas" element={<Bandas />} />
-          <Route path="/pais" element={<Pais />} />
+          <Route path="/bands" element={<Bands />} />
+          <Route path="/country" element={<Country />} />
           <Route path="/formulario" element={<Formulario />} />
-          <Route path="/biografia/:id" element={<Biografia />} />
+          <Route path="/biography/:id" element={<Biography />} />
           <Route path="/multimedia/:id" element={<Multimedia />} />
           <Route path="/productos/:id" element={<Productos />} />
           <Route path="/formulariolink/:id" element={<FormularioLink />} />

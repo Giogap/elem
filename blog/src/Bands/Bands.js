@@ -22,7 +22,7 @@ function Bands() {
         <ul>
           {bandsList.map((band) => (
             <li key={band.id}>
-              <Link to={`/Biografia/${band.id}`}>{band.name}</Link>
+              <Link to={`/Biography/${band.id}`}>{band.name}</Link>
             </li>
           ))}
         </ul>
