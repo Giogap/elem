@@ -9,9 +9,9 @@ function FormularioLink () {
 
   const [enlacesList, setEnlaces] = useState([]);
 
-  const [bandasList, setBandas] = useState([]);
+  const [bandsList, setBands] = useState([]);
 
-  const [bandaSeleccionada, setBandaSeleccionada] = useState(null);
+  const [bandSeleccionada, setBandSeleccionada] = useState(null);
 
   const addLink = () => {
     Axios.post(`http://localhost:3001/createLink/${id}`, {
@@ -39,15 +39,15 @@ function FormularioLink () {
     setEnlace("");
   }  
 
-  const getBandas = () => {
-    Axios.get("http://localhost:3001/bandas").then((response) => {
-      setBandas(response.data);
-      const banda = response.data.find((banda) => banda.id === parseInt(id));
-      setBandaSeleccionada(banda);
+  const getBands = () => {
+    Axios.get("http://localhost:3001/bands").then((response) => {
+      setBands(response.data);
+      const band = response.data.find((band) => band.id === parseInt(id));
+      setBandSeleccionada(band);
     });
   };
 
-  useEffect(() => {getBandas()}, []);
+  useEffect(() => {getBands()}, []);
 
   return (
     <div>
@@ -85,8 +85,8 @@ function FormularioLink () {
                 </div>
             </div>      
         </div>
-        {bandaSeleccionada && (
-          <Link to={`/FormularioProducto/${bandaSeleccionada.id}`}>
+        {bandSeleccionada && (
+          <Link to={`/FormularioProducto/${bandSeleccionada.id}`}>
             <button className="ingresarproducto">Ingresar Producto</button>
           </Link>
         )}           
