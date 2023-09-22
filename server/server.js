@@ -10,18 +10,19 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "escarraman_db"
+    database: "p_escarra_db"
 
 });
 
 app.post("/create", (req, res) => {
-    const nombre = req.body.nombre;
-    const biografia = req.body.biografia;
-    const genero = req.body.genero;
+    const name = req.body.name;
+    const country = req.body.country;
+    const genre = req.body.genre;
+    const biografia = req.body.biografia;    
     const pais = req.body.pais;
     
 
-    db.query('INSERT INTO bandas(nombre, biografia, genero, pais) VALUES (?, ?, ?, ?)', [nombre, biografia, genero, pais], (err, result) => {
+    db.query('INSERT INTO bandas(name, country, genre, biografia, pais) VALUES (?, ?, ?, ?, ?)', [name, country, genre, biografia, pais], (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -32,9 +33,9 @@ app.post("/create", (req, res) => {
 
 app.post("/createLink/:id", (req, res) => {
     const enlace = req.body.enlace;
-    const banda_id = req.params.id;
+    const band_id = req.params.id;
     
-    db.query('INSERT INTO multimedia(banda_id, enlace) VALUES (?, ?)', [banda_id, enlace], (err, result) => {
+    db.query('INSERT INTO multimedia(band_id, enlace) VALUES (?, ?)', [band_id, enlace], (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -44,8 +45,8 @@ app.post("/createLink/:id", (req, res) => {
 });
 
 
-app.get("/bandas", (req, res) => {
-    db.query('SELECT * FROM bandas', (err, result) => {
+app.get("/bands", (req, res) => {
+    db.query('SELECT * FROM bands', (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -55,10 +56,10 @@ app.get("/bandas", (req, res) => {
 });
 
 
-app.get("/bandas/:id", (req, res) => {
+app.get("/bands/:id", (req, res) => {
     const id = req.params.id;
 
-    db.query('SELECT * FROM bandas WHERE id = ?', id, (err, result) => {
+    db.query('SELECT * FROM bands WHERE id = ?', id, (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -72,9 +73,9 @@ app.get("/bandas/:id", (req, res) => {
 });
 
 app.get("/Formulariolink/:id", (req, res) => {
-    const banda_id = req.params.id;
+    const band_id = req.params.id;
   
-    db.query('SELECT * FROM multimedia WHERE banda_id = ?', banda_id, (err, result) => {
+    db.query('SELECT * FROM multimedia WHERE band_id = ?', band_id, (err, result) => {
       if (err) {
         console.log(err);
         res.status(500).send("Error en el servidor");
@@ -87,14 +88,15 @@ app.get("/Formulariolink/:id", (req, res) => {
 
 
 app.put("/update", (req, res) => {
-    const nombre = req.body.nombre;
-    const biografia = req.body.biografia;
-    const genero = req.body.genero;
+    const name = req.body.name;
+    const country = req.body.country;
+    const genre = req.body.genre;
+    const biografia = req.body.biografia;    
     const pais = req.body.pais;
     const id = req.body.id;
     
 
-    db.query('UPDATE bandas SET nombre = ?, biografia = ?, genero = ?, pais = ? WHERE id = ?', [nombre, biografia, genero, pais, id], (err, result) => {
+    db.query('UPDATE bands SET name = ?, country = ?, genre = ?, biografia = ?, pais = ? WHERE id = ?', [name, country, biografia, genero, pais, id], (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -107,7 +109,7 @@ app.delete("/delete/:id", (req, res) => {
     const id = req.params.id;
     
 
-    db.query('DELETE FROM bandas WHERE id = ?', id, (err, result) => {
+    db.query('DELETE FROM bands WHERE id = ?', id, (err, result) => {
         if (err) {
             console.log(err);
         } else {

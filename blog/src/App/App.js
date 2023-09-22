@@ -4,8 +4,8 @@ import "./App.css";
 import logo from './logo.svg';
 
 import Home from "../Navbar/Home";
-import Bandas from "../Navbar/Bandas";
-import Pais from "../Navbar/Pais";
+import Bandas from "../Bands/Bands";
+import Pais from "../Country/Country";
 import Navbar from "../Navbar/Navbar";
 import Formulario from "../Formulario/Formulario";
 import Biografia from "../Biografia/Biografia";

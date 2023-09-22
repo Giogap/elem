@@ -6,21 +6,23 @@ import Axios from "axios";
 
 function Formulario() {
 
-  const [nombre, setNombre] = useState("");
-  const [biografia, setBiografia] = useState("");
-  const [genero, setGenero] = useState("");
+  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
+  const [genre, setGenre] = useState("");
+  const [biografia, setBiografia] = useState("");  
   const [pais, setPais] = useState("");
   const [id, setId] = useState("");
 
-  const [editar, setEditar] = useState(false);
+  const [edit, setEdit] = useState(false);
 
-  const [bandasList, setBandas] = useState([]);
+  const [bandsList, setBands] = useState([]);
 
   const add = () => {
     Axios.post("http://localhost:3001/create", {
-      nombre: nombre,
-      biografia: biografia,
-      genero: genero,
+      name: name,
+      country: country,
+      genre: genre,
+      biografia: biografia,      
       pais: pais,
     }).then(() => {
       /*getBandas();*/
@@ -31,9 +33,10 @@ function Formulario() {
 
   const update = () => {
     Axios.put("http://localhost:3001/update", {
-      nombre: nombre,
-      biografia: biografia,
-      genero: genero,
+      name: name,
+      country: country,
+      genre: genre,
+      biografia: biografia,      
       pais: pais,
       id:id,
     }).then(() => {
@@ -42,56 +45,61 @@ function Formulario() {
     });
   };
 
-  const deleteBanda = (id) => {
+  const deleteBand = (id) => {
     Axios.delete(`http://localhost:3001/delete/${id}`).then(() => {
       alert("Eliminado Ok")
     });
   };
 
   const limpiarCampos = () => {
-    setNombre("");
-    setBiografia("");
-    setGenero("");
+    setName("");
+    setCountry("");
+    setGenre("");
     setPais("");
-    setEditar(false);
+    setEdit(false);
   }
 
-  const editarBanda = (val) => {
-    setEditar(true);
+  const editBand = (val) => {
+    setEdit(true);
 
-    setNombre(val.nombre);
-    setBiografia(val.biografia);
-    setGenero(val.genero);
+    setName(val.name);
+    setCountry(val.country);
+    setGenre(val.genre);
+    setBiografia(val.biografia);    
     setPais(val.pais);
     setId(val.id);
   }
 
-  const getBandas = () => {
+  const getBands = () => {
     Axios.get("http://localhost:3001/bandas").then((response) => {
-      setBandas(response.data);
+      setBands(response.data);
     });
   };
 
-  useEffect(() => {getBandas()}, []);
+  useEffect(() => {getBands()}, []);
   
   return (
     <div className='container'>
       <div className="formulario">
         <div className="datos">
           <label>Nombre: <input onChange={(event)=>{
-            setNombre(event.target.value);
-          }} type="text" value={nombre}></input></label>
+            setName(event.target.value);
+          }} type="text" value={name}></input></label>
+          <label>Pais: <input onChange={(event)=>{
+            setCountry(event.target.value);
+          }} type="text" value={country}></input></label>
+          <label>Genero: <input onChange={(event)=>{
+            setGenre(event.target.value);
+          }} type="text" value={genre}></input></label>
           <label>Biografia: <input onChange={(event)=>{
             setBiografia(event.target.value);
           }} type="text" value={biografia}></input></label>
-          <label>Genero: <input onChange={(event)=>{
-            setGenero(event.target.value);
-          }} type="text" value={genero}></input></label>
+          
           <label>Pais: <input onChange={(event)=>{
             setPais(event.target.value);
           }} type="text" value={pais}></input></label>
           {
-            editar?
+            edit?
             <div>
               <button onClick={update}>Actualizar</button>
               <button onClick={limpiarCampos}>Cancelar</button>
@@ -100,7 +108,7 @@ function Formulario() {
           }
         </div>
         <div className='lista'>
-          <button onClick={getBandas}>Mostrar</button>
+          <button onClick={getBands}>Mostrar</button>
           <table className="table">
             <thead>
               <tr>
@@ -112,25 +120,24 @@ function Formulario() {
               </tr>
             </thead>
             <tbody>
-              {bandasList.map((banda) => (
-                <tr key={banda.id}>
-                  <td><Link to={`/Formulariolink/${banda.id}`}>{banda.nombre}</Link></td>
-                  <td>{banda.biografia}</td>
-                  <td>{banda.genero}</td>
-                  <td>{banda.pais}</td>
+              {bandsList.map((band) => (
+                <tr key={band.id}>
+                  <td><Link to={`/Formulariolink/${band.id}`}>{band.name}</Link></td>
+                  <td>{band.genre}</td>
+                  <td>{band.biografia}</td>                  
+                  <td>{band.pais}</td>
                   <td>
                     <button onClick={() => {
-                      editarBanda(banda);   
+                      editBand(band);   
                     }}>Editar</button>
                     <button onClick={() => {
-                      deleteBanda(banda.id)
+                      deleteBand(band.id)
                     }}>Eliminar</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-
         </div>
       </div>     
     </div>
