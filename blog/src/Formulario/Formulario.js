@@ -9,6 +9,7 @@ function Formulario() {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [genre, setGenre] = useState("");
+  const [logo, setLogo] = useState(null);
   const [biography, setBiography] = useState("");  
   const [phone, setPhone] = useState("");
   const [id, setId] = useState("");
@@ -22,6 +23,7 @@ function Formulario() {
       name: name,
       country: country,
       genre: genre,
+      logo: logo,
       biography: biography,      
       phone: phone,
     }).then(() => {
@@ -36,6 +38,7 @@ function Formulario() {
       name: name,
       country: country,
       genre: genre,
+      logo: logo,
       biography: biography,      
       phone: phone,
       id:id,
@@ -66,6 +69,7 @@ function Formulario() {
     setName(val.name);
     setCountry(val.country);
     setGenre(val.genre);
+    setLogo(val.logo);
     setBiography(val.biography);    
     setPhone(val.phone);
     setId(val.id);
@@ -92,6 +96,10 @@ function Formulario() {
           <label>Genero: <input onChange={(event)=>{
             setGenre(event.target.value);
           }} type="text" value={genre}></input></label>
+          <label>Logo: <input type="file" accept="image/*"onChange={(event) => {
+            const file = event.target.files[0]; setLogo(file);
+            }} />
+          </label>
           <label>Biografia: <input onChange={(event)=>{
             setBiography(event.target.value);
           }} type="text" value={biography}></input></label>          

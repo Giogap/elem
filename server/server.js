@@ -2,6 +2,19 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const multer = require('multer');
+
+// Configuración de Multer para manejar la carga de archivos
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Define el directorio donde se guardarán los archivos
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + '-' + file.originalname); // Define el nombre del archivo
+    }
+  });
+  
+  const upload = multer({ storage: storage });
 
 app.use(cors());
 app.use(express.json());
@@ -14,15 +27,16 @@ const db = mysql.createConnection({
 
 });
 
-app.post("/create", (req, res) => {
+// Ruta de creación de bandas con Multer
+app.post("/create", upload.single('logo'), (req, res) => {
     const name = req.body.name;
     const country = req.body.country;
     const genre = req.body.genre;
     const biography = req.body.biography;    
-    const pais = req.body.pais;
-    
+    const phone = req.body.phone;
+    const logo = req.file ? req.file.filename : null; // Nombre del archivo guardado
 
-    db.query('INSERT INTO bandas(name, country, genre, biography, phone) VALUES (?, ?, ?, ?, ?)', [name, country, genre, biography, phone], (err, result) => {
+    db.query('INSERT INTO bands(name, country, genre, logo, biography, phone) VALUES (?, ?, ?, ?, ?, ?)', [name, country, genre, logo, biography, phone], (err, result) => {
         if (err) {
             console.log(err);
         } else {
