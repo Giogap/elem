@@ -19,6 +19,7 @@ function Formulario() {
   const [bandsList, setBands] = useState([]);
 
   const add = () => {
+    console.log(logo);
     Axios.post("http://localhost:3001/create", {
       name: name,
       country: country,
@@ -97,7 +98,9 @@ function Formulario() {
             setGenre(event.target.value);
           }} type="text" value={genre}></input></label>
           <label>Logo: <input type="file" accept="image/*"onChange={(event) => {
-            const file = event.target.files[0]; setLogo(file);
+            const file = event.target.files[0]; 
+            setLogo(file);
+            console.log(file);
             }} />
           </label>
           <label>Biografia: <input onChange={(event)=>{

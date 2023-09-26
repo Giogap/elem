@@ -32,9 +32,9 @@ app.post("/create", upload.single('logo'), (req, res) => {
     const name = req.body.name;
     const country = req.body.country;
     const genre = req.body.genre;
+    const logo = req.file ? req.file.filename : null;
     const biography = req.body.biography;    
     const phone = req.body.phone;
-    const logo = req.file ? req.file.filename : null; // Nombre del archivo guardado
 
     db.query('INSERT INTO bands(name, country, genre, logo, biography, phone) VALUES (?, ?, ?, ?, ?, ?)', [name, country, genre, logo, biography, phone], (err, result) => {
         if (err) {
@@ -105,12 +105,13 @@ app.put("/update", (req, res) => {
     const name = req.body.name;
     const country = req.body.country;
     const genre = req.body.genre;
+    const logo = req.body.logo;
     const biography = req.body.biography;    
     const phone = req.body.phone;
     const id = req.body.id;
     
 
-    db.query('UPDATE bands SET name = ?, country = ?, genre = ?, biography = ?, phone = ? WHERE id = ?', [name, country, genre, biography, phone, id], (err, result) => {
+    db.query('UPDATE bands SET name = ?, country = ?, genre = ?, logo = ?, biography = ?, phone = ? WHERE id = ?', [name, country, genre, logo, biography, phone, id], (err, result) => {
         if (err) {
             console.log(err);
         } else {
